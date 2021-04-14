@@ -40,7 +40,7 @@ example_data:  Example data files that can be used to test this pipeline, includ
 
 -f: The peak file of ChIP-seq/DNase-seq data;
 
--j: The path of 
+-j: The path of snpEff.jar;
 
 -a: Species, include human and mouse. Human: hg38; mouse: mm10;
 
