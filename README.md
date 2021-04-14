@@ -16,7 +16,7 @@ betabinomial.R: Use Chen's method to obtain ASB sites;
 
 draw_cCRE.py: Draw pie charts of cCREs distribution;
 
-data: snpEFF software and cCREs from SCREEN database;
+data: human and mouse cCREs from SCREEN database;
 
 example_data:  Example data files that can be used to test this pipeline, including single-end and paired-end reads.
 
@@ -40,6 +40,8 @@ example_data:  Example data files that can be used to test this pipeline, includ
 
 -f: The peak file of ChIP-seq/DNase-seq data;
 
+-j: The path of 
+
 -a: Species, include human and mouse. Human: hg38; mouse: mm10;
 
 -o: Output folder.
@@ -55,6 +57,7 @@ sh get_AS.sh \
 	-c  ${path}/example_data/chromeinfo/GRCh38_EBV.chrom.sizes.tsv \
 	-h ${path}/example_data/h5 \
 	-f ${path}/example_data/ENCFF801BDJ.bed \
+	-j ${path}/data/snpEFF/snpEff/snpEff.jar \
 	-a human \
 	-o ${path}/example_data/output/single/
 ```
@@ -70,6 +73,7 @@ sh get_AS.sh \
 	-c  ${path}/example_data/chromeinfo/GRCh38_EBV.chrom.sizes.tsv \
 	-h ${path}/example_data/h5 \
 	-f ${path}/example_data/ENCFF801BDJ.bed \
+	-j ${path}/data/snpEFF/snpEff/snpEff.jar \
 	-a human \
 	-o ${path}/example_data/output/paired/
 ```
@@ -101,6 +105,7 @@ Softwares:
 - Picard
 - tabix
 - bedtools intersect (aka. intersectBed)
+- snpEFF
 
 Conda can install these softare and packages directly:
 
