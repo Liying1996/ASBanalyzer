@@ -7,7 +7,7 @@ opts=false
 optp=false
 opth=false 
 optv=false 
-while getopts 's:p:w:i:c:h:v:f:a:o:' arg
+while getopts 's:p:w:i:c:h:v:f:j:a:o:' arg
 do
 	case $arg in
 
@@ -49,6 +49,9 @@ do
 		;;
 	 f)
 		file_peak=$OPTARG
+		;;
+	 j)
+		snpeff_jar=$OPTARG
 		;;
 	 a)
 		annotation=$OPTARG 
@@ -166,10 +169,9 @@ python ${basepath}/draw_cCRE.py -file ${output_dir}/annotation/${name}_ccre.txt 
 # snpEFF Annotation
 cd ${output_dir}/annotation/
 awk -F '\t' '{print $1"\t"$2"\t"$NF"\t"$4"\t"$5}' ${output_dir}/annotation/${name}_counts_AS_0.1.bed > ${output_dir}/annotation/${name}.txt 
-java -jar ${basepath}/data/snpEFF/snpEff/snpEff.jar ${snpeff} ${output_dir}/annotation/${name}.txt >  ${output_dir}/annotation/${name}.ann.txt 
+java -jar ${snpeff_jar} ${snpeff} ${output_dir}/annotation/${name}.txt >  ${output_dir}/annotation/${name}.ann.txt 
 rm ${output_dir}/annotation/${name}.txt 
 
 echo 'End!'
-
 
 
