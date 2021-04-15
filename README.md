@@ -50,7 +50,7 @@ For example, single-end reads:
 
 ```shell
 path=~/ASBfinder/
-sh get_AS.sh \
+bash get_AS.sh \
 	-s ${path}/example_data/single_end/ENCFF000OCP.fastq.gz \
 	-w ~/WASP/ \
 	-i ~/hg38_index/GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta \
@@ -66,7 +66,7 @@ Paired-end reads:
 
 ```shell
 path=~/ASBfinder/
-sh get_AS.sh \
+bash get_AS.sh \
 	-p ${path}/example_data/paired_end/ENCFF340SQP.fastq.gz,${path}/example_data/paired_end/ENCFF587OVW.fastq.gz \
 	-w ~/WASP/ \
 	-i ~/hg38_index/GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta \
