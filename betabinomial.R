@@ -430,7 +430,7 @@ if (dim(sub)[1]>0){
 
 
 
-jpeg(file = paste0(strsplit(file_name,"\\.")[[1]][1], '_', fdr, ".jpeg"), height = 500, width = 700)
+pdf(file = paste0(strsplit(file_name,"\\.")[[1]][1], '_', fdr, ".pdf"), height = 10, width = 12)
 par(cex.axis=1, cex.lab=1, cex.main=1.5)
 barplot(empirical, main=paste(title, ' (rho=', rho, ')', sep=''), ylab='density', xlab='Reference allele ratio',names.arg=h$mids, ylim=c(0,1.15*yuplimit))
 par(new=TRUE)
