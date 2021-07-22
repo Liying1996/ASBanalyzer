@@ -125,10 +125,10 @@ python ${wasp_path}/CHT/bam2h5.py \
 # Get SNPs in peaks
 echo "Obtain SNPs in peaks ..."
 mkdir ${output_dir}/inpeak/
-awk -F ' ' '{print $1"\t"$2"\t"$2+1"\t"$3"\t"$4"\t"$5"\t"$6}' ${output_dir}/counts/${name}_counts.txt > ${output_dir}/counts/${name}_counts.bed
+awk -F ' ' '{print $1"\t"$2-1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6}' ${output_dir}/counts/${name}_counts.txt > ${output_dir}/counts/${name}_counts.bed
 sed -i 's/ /\t/g' ${output_dir}/counts/${name}_counts.bed
 intersectBed -a ${output_dir}/counts/${name}_counts.bed -b ${file_peak} | sort | uniq > ${output_dir}/counts/${name}_tmp.txt
-cut -f1,2,4,5,6,7 ${output_dir}/counts/${name}_tmp.txt > ${output_dir}/inpeak/${name}_counts.txt
+cut -f1,3,4,5,6,7 ${output_dir}/counts/${name}_tmp.txt > ${output_dir}/inpeak/${name}_counts.txt
 rm ${output_dir}/counts/${name}_tmp.txt ${output_dir}/counts/${name}_counts.bed 
 
 
@@ -152,7 +152,7 @@ fi
 
 # cCREs
 mkdir ${output_dir}/annotation
-awk -F '\t' '{print $1"\t"$2"\t"$2+1}' ${output_dir}/inpeak/${name}_counts_AS_0.1.txt >  ${output_dir}/annotation/tmp1
+awk -F '\t' '{print $1"\t"$2-1"\t"$2}' ${output_dir}/inpeak/${name}_counts_AS_0.1.txt >  ${output_dir}/annotation/tmp1
 sed -i '1s/1$/Pos2/' ${output_dir}/annotation/tmp1
 cut -f3-13 ${output_dir}/inpeak/${name}_counts_AS_0.1.txt >  ${output_dir}/annotation/tmp2
 paste ${output_dir}/annotation/tmp1 ${output_dir}/annotation/tmp2 > ${output_dir}/annotation/${name}_counts_AS_0.1.bed 
@@ -168,7 +168,7 @@ python ${basepath}/draw_cCRE.py -file ${output_dir}/annotation/${name}_ccre.txt 
 
 # snpEFF Annotation
 cd ${output_dir}/annotation/
-awk -F '\t' '{print $1"\t"$2"\t"$NF"\t"$4"\t"$5}' ${output_dir}/annotation/${name}_counts_AS_0.1.bed > ${output_dir}/annotation/${name}.txt 
+awk -F '\t' '{print $1"\t"$3"\t"$NF"\t"$4"\t"$5}' ${output_dir}/annotation/${name}_counts_AS_0.1.bed > ${output_dir}/annotation/${name}.txt 
 java -jar ${snpeff_jar} ${snpeff} ${output_dir}/annotation/${name}.txt >  ${output_dir}/annotation/${name}.ann.txt 
 rm ${output_dir}/annotation/${name}.txt 
 
