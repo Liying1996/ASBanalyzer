@@ -428,28 +428,24 @@ if (dim(sub)[1]>0){
   empirical.betabin = rep(0,50)
 }
 
-
-
-pdf(file = paste0(strsplit(file_name,"\\.")[[1]][1], '_', fdr, ".pdf"), height = 10, width = 12)
+jpeg(file = paste0(strsplit(file_name,"\\.")[[1]][1], '_', fdr, ".jpeg"), height = 600, width = 800)
 par(cex.axis=1, cex.lab=1, cex.main=1.5)
-barplot(empirical, main=paste(title, ' (rho=', rho, ')', sep=''), ylab='density', xlab='Reference allele ratio',names.arg=h$mids, ylim=c(0,1.15*yuplimit))
+barplot(empirical, main=paste0(title, " (rho = ", signif(b.choice,3), ")"),ylab='density', xlab='allelic Ratio',names.arg=h$mids, ylim=c(0,1.15*yuplimit), xaxt="n")
 par(new=TRUE)
-barplot(empirical.bin, col='red',ylab='density', xlab='Reference allele ratio',
-        names.arg=h$mids, ylim=c(0,1.15*yuplimit))
+barplot(empirical.bin, ylab='density', xlab='allelic Ratio', col='red',
+        names.arg=h$mids, ylim=c(0,1.15*yuplimit), xaxt="n")
 par(new=TRUE)
-barplot(empirical.betabin, col='blue',ylab='density', xlab='Reference allele ratio',
-                     names.arg=h$mids, ylim=c(0,1.15*yuplimit))
+barplot(empirical.betabin, ylab='density', xlab='allelic Ratio', col='blue',
+                     names.arg=h$mids, ylim=c(0,1.15*yuplimit), xaxt="n")
 par(new=TRUE)
 plot(d.combined.sorted.binned,ylim=c(0,yuplimit),pch=16,type='b',col='red',
-     bty='n',ylab='',xlab='',yaxt='n',xaxt='n',yaxs="i", cex = 0.8)
+     bty='n',ylab='',xlab='',yaxt='n',xaxt='n',yaxs="i", cex = 0.8, xaxt="n")
 par(new=TRUE)
 plot(e.combined.sorted.binned,ylim=c(0,yuplimit), pch=17,type='b',col='blue',
-     bty='n',ylab='',xlab='',yaxt='n',xaxt='n',yaxs="i", cex = 0.8)
+     bty='n',ylab='',xlab='',yaxt='n',xaxt='n',yaxs="i", cex = 0.8, xaxt="n")
+axis(1,seq(0.01, 0.97, by=0.06),labels=c('0', rep(' ', 7), 0.5, rep(' ', 7),'1')) 
 
-legend(0.01,0.14,c("empirical","binomial","betabinomial"),
+legend(0.01,0.14,c("empirical","binomial","beta-binomial"),
        col=c("grey","red","blue"),
        cex=1, pt.cex=2,text.col = "black", pch = 15, bg = 'white')
 dev.off()
-
-
-

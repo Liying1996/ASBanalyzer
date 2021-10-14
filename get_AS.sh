@@ -7,7 +7,7 @@ opts=false
 optp=false
 opth=false 
 optv=false 
-while getopts 's:p:w:i:c:h:v:f:j:a:o:' arg
+while getopts 's:p:w:i:c:h:v:f:j:a:o:m:g:r:' arg
 do
 	case $arg in
 
@@ -58,6 +58,15 @@ do
 		;;
      o)
 		output_dir=$OPTARG
+		;;
+	 m)
+		motif_file=$OPTARG
+		;;
+	 g)
+		gtex_file=$OPTARG
+		;;
+	 r)
+		fasta=$OPTARG
 		;;
 	\?) die "Invalid option!"
 	  	;;
@@ -125,9 +134,9 @@ python ${wasp_path}/CHT/bam2h5.py \
 # Get SNPs in peaks
 echo "Obtain SNPs in peaks ..."
 mkdir ${output_dir}/inpeak/
-awk -F ' ' '{print $1"\t"$2-1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6}' ${output_dir}/counts/${name}_counts.txt > ${output_dir}/counts/${name}_counts.bed
+awk -F ' ' '{print $1"\t"$2-1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6}' ${output_dir}/counts/${name}_counts.txt > ${output_dir}/counts/${name}_counts.bed # 0-base
 sed -i 's/ /\t/g' ${output_dir}/counts/${name}_counts.bed
-intersectBed -a ${output_dir}/counts/${name}_counts.bed -b ${file_peak} | sort | uniq > ${output_dir}/counts/${name}_tmp.txt
+bedtools intersect -a ${output_dir}/counts/${name}_counts.bed -b ${file_peak} | sort | uniq > ${output_dir}/counts/${name}_tmp.txt
 cut -f1,3,4,5,6,7 ${output_dir}/counts/${name}_tmp.txt > ${output_dir}/inpeak/${name}_counts.txt
 rm ${output_dir}/counts/${name}_tmp.txt ${output_dir}/counts/${name}_counts.bed 
 
@@ -152,14 +161,14 @@ fi
 
 # cCREs
 mkdir ${output_dir}/annotation
-awk -F '\t' '{print $1"\t"$2-1"\t"$2}' ${output_dir}/inpeak/${name}_counts_AS_0.1.txt >  ${output_dir}/annotation/tmp1
+awk -F '\t' '{print $1"\t"$2-1"\t"$2}' ${output_dir}/inpeak/${name}_counts_AS_0.1.txt >  ${output_dir}/annotation/tmp1 # 0-based
 sed -i '1s/1$/Pos2/' ${output_dir}/annotation/tmp1
 cut -f3-13 ${output_dir}/inpeak/${name}_counts_AS_0.1.txt >  ${output_dir}/annotation/tmp2
 paste ${output_dir}/annotation/tmp1 ${output_dir}/annotation/tmp2 > ${output_dir}/annotation/${name}_counts_AS_0.1.bed 
+sed -i '1d'  ${output_dir}/annotation/${name}_counts_AS_0.1.bed
+bedtools intersect -a ${output_dir}/annotation/${name}_counts_AS_0.1.bed -b $ccre_file -wa -wb >  ${output_dir}/annotation/${name}_ccre.txt 
 
-intersectBed -a ${output_dir}/annotation/${name}_counts_AS_0.1.bed -b $ccre_file -wa -wb >  ${output_dir}/annotation/${name}_ccre.txt 
-
-intersectBed -a ${output_dir}/annotation/${name}_counts_AS_0.1.bed -b $ccre_file -v >  ${output_dir}/annotation/tmp3
+bedtools intersect -a ${output_dir}/annotation/${name}_counts_AS_0.1.bed -b $ccre_file -v >  ${output_dir}/annotation/tmp3
 awk -F '\t' '{print $0"\t-\t-\t-\t-\t-\tUnclassified"}'  ${output_dir}/annotation/tmp3 >> ${output_dir}/annotation/${name}_ccre.txt
 
 rm ${output_dir}/annotation/tmp*
@@ -172,6 +181,18 @@ awk -F '\t' '{print $1"\t"$3"\t"$NF"\t"$4"\t"$5}' ${output_dir}/annotation/${nam
 java -jar ${snpeff_jar} ${snpeff} ${output_dir}/annotation/${name}.txt >  ${output_dir}/annotation/${name}.ann.txt 
 rm ${output_dir}/annotation/${name}.txt 
 
-echo 'End!'
+# Motif analysis
+sh ${basepath}/cal_motif.sh -i ${output_dir}/inpeak/${name}_counts_AS_0.1.txt -n ${name} -f ${fasta} -m ${motif_file} -o ${output_dir}
 
+# compare with GWAS and GTEx (only human hg38)
+if [ "$annotation" == "human" ];then 
+	mkdir ${output_dir}/motif/GTEx_GWAS/
+	awk -F '[\t+]' 'FNR==NR {x["chr"$12"_"$13];next} ($1"_"$4 in x)' ${basepath}/data/GWAS/gwas_all_associations.txt ${output_dir}/motif/${name}_AS_inmotif.txt > ${output_dir}/motif/GTEx_GWAS/${name}_AS_inmotif_gwas_snps.txt
+	awk -F '[\t+]' 'FNR==NR {x[$1"_"$4];next} ("chr"$12"_"$13 in x)' ${output_dir}/motif/${name}_AS_inmotif.txt ${basepath}/data/GWAS/gwas_all_associations.txt > ${output_dir}/motif/GTEx_GWAS/${name}_AS_inmotif_gwas_disease.txt
+
+	awk -F '[\t|_]' 'FNR==NR {x[$1"_"$2];next} ($1"_"$4 in x)' ${gtex_file} ${output_dir}/motif/${name}_AS_inmotif.txt > ${output_dir}/motif/GTEx_GWAS/${name}_AS_inmotif_gtex_snps.txt
+	awk -F '[\t|_]' 'FNR==NR {x[$1"_"$4];next} ($1"_"$2 in x)' ${output_dir}/motif/${name}_AS_inmotif.txt ${gtex_file} > ${output_dir}/motif/GTEx_GWAS/${name}_AS_inmotif_gtex_genepairs.txt
+fi
+
+echo 'End!'
 

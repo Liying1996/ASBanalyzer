@@ -1,10 +1,9 @@
 import pandas as pd
-import matplotlib as mpl
-mpl.use('Agg')
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import argparse
 
-# plt.switch_backend('agg')
+plt.switch_backend('agg')
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-file", help="please give the file path", required=True)
