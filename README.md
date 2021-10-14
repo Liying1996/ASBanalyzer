@@ -16,6 +16,12 @@ betabinomial.R: Use Chen's method to obtain ASB sites;
 
 draw_cCRE.py: Draw pie charts of cCREs distribution;
 
+draw_motif.R: Draw histograms of motif enrichment; 
+
+best_match.py: Select best Fimo outputs; 
+
+trans_alt.py: Convert the fasta with reference allele to fasta with alternative allele;
+
 data: human and mouse cCREs from SCREEN database;
 
 example_data:  Example data files that can be used to test this pipeline, including single-end and paired-end reads.
@@ -30,7 +36,7 @@ example_data:  Example data files that can be used to test this pipeline, includ
 
 -w: The directory of WASP;
 
--i: The BWA index (Not provided in the example_data);
+-i: The BWA index (Not provided in the example_data/);
 
 -c: The ChromInfo file;
 
@@ -44,7 +50,14 @@ example_data:  Example data files that can be used to test this pipeline, includ
 
 -a: Species, include human and mouse. Human: hg38; mouse: mm10;
 
--o: Output folder.
+-o: Output folder;
+
+-m: The motifs of a transcript factor (you can download from [here](https://meme-suite.org/meme/meme-software/Databases/motifs/motif_databases.12.21.tgz));
+
+-g: Significant variant-gene associations downloaded from [GTEx](https://storage.googleapis.com/gtex_analysis_v8/single_tissue_qtl_data/GTEx_Analysis_v8_eQTL.tar); 
+
+-r: Reference fasta file.
+
 
 For example, single-end reads:
 
@@ -60,6 +73,9 @@ bash get_AS.sh \
 	-j ${path}/data/snpEFF/snpEff/snpEff.jar \
 	-a human \
 	-o ${path}/example_data/output/single/
+	-m ${path}/example_data/CTCF.meme \
+	-g ~/GTEx/GTEx_Analysis_v8_eQTL/Whole_Blood.v8.signif_variant_gene_pairs.txt \
+	-r ~/hg38_index/GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta 
 ```
 
 Paired-end reads:
@@ -76,6 +92,9 @@ bash get_AS.sh \
 	-j ${path}/data/snpEFF/snpEff/snpEff.jar \
 	-a human \
 	-o ${path}/example_data/output/paired/
+	-m ${path}/example_data/CTCF.meme \
+	-g ~/GTEx/GTEx_Analysis_v8_eQTL/Whole_Blood.v8.signif_variant_gene_pairs.txt \
+	-r ~/hg38_index/GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta 
 ```
 
 ---
@@ -98,6 +117,9 @@ Python3 (Highly recommend Anaconda):
 R:
 
 - VGAM
+- Unicode
+- ggplot2
+
 
 Softwares:
 
@@ -106,6 +128,7 @@ Softwares:
 - tabix
 - bedtools intersect (aka. intersectBed)
 - snpEFF
+- fimo
 
 Conda can install these softare and packages directly:
 
