@@ -428,7 +428,8 @@ if (dim(sub)[1]>0){
   empirical.betabin = rep(0,50)
 }
 
-jpeg(file = paste0(strsplit(file_name,"\\.")[[1]][1], '_', fdr, ".jpeg"), height = 600, width = 800)
+# jpeg(file = paste0(strsplit(file_name,"\\.")[[1]][1], '_', fdr, ".jpeg"), height = 600, width = 800)
+pdf(file = paste0(strsplit(file_name,"\\.")[[1]][1], '_', fdr, ".pdf"), height = 10, width = 12)
 par(cex.axis=1, cex.lab=1, cex.main=1.5)
 barplot(empirical, main=paste0(title, " (rho = ", signif(b.choice,3), ")"),ylab='density', xlab='allelic Ratio',names.arg=h$mids, ylim=c(0,1.15*yuplimit), xaxt="n")
 par(new=TRUE)
