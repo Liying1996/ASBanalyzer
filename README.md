@@ -99,9 +99,21 @@ bash get_AS.sh \
 
 ---
 
+#### Conda Environment
+You can directly download the conda environment in: 
+After downloaded, you'll get a file named 'ASB_env.tar.gz'
+
+Then Use `tar -zxvf` to unzip;
+Finally use the following code to activate the conda environment:
+`source ./ASB_env/bin/activate`
+
+
+
+
+
 #### Dependencies
 
-The pipeline requires WASP to remove the mapping bias, so it must meet the WASP requirements.
+If you want to build an environment by yourself, the following are dependencies:
 
 Python3 (Highly recommend Anaconda):
 
@@ -119,6 +131,8 @@ R:
 - VGAM
 - Unicode
 - ggplot2
+- ggpubr
+- ggsci
 
 
 Softwares:
