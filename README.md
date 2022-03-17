@@ -6,7 +6,7 @@
 
 ASBanalyzer is a pipeline of analyzing allele-specific binding (ASB) sites.
 
-The following directories and files are included with ASBfinder:
+The following directories and files are included with ASBanalyzer:
 
 get_AS.sh: The main pipeline;
 
