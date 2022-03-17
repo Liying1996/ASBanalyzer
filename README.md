@@ -1,10 +1,10 @@
-### **ASBfinder manual**
+### **ASBanalyzer manual**
 
 ---
 
 #### Introduction
 
-ASBfinder is a pipeline of identifying allele-specific binding (ASB) sites.
+ASBanalyzer is a pipeline of analyzing allele-specific binding (ASB) sites.
 
 The following directories and files are included with ASBfinder:
 
@@ -14,13 +14,25 @@ remove_bias_SE.sh/remove_bias_PE.sh: WASP to remove mapping bias;
 
 betabinomial.R: Use Chen's method to obtain ASB sites;
 
-draw_cCRE.py: Draw pie charts of cCREs distribution;
+draw_cCRE_pie.py: Draw pie charts of cCREs distribution;
+
+draw_cCRE_hist.R: Draw histograms of cCREs distribution;
+
+draw_freq.py: Plot the positions distribution of SNPs that disrupt the motif sequence；
+
+draw_annotaion.R: Draw  histograms of snpEFF annotated regions；
 
 draw_motif.R: Draw histograms of motif enrichment; 
 
+draw_AR_score.R: Plot scatter plots of reference allele ratio and motifs scores of 2 alleles;
+
 best_match.py: Select best Fimo outputs; 
 
+motif_disrupt.py: Obtain SNPs' positions of motifs and calculate the frequency of pos of disruptions;
+
 trans_alt.py: Convert the fasta with reference allele to fasta with alternative allele;
+
+motif_score.sh: Calculate the motif scores of 2 alleles;
 
 data: human and mouse cCREs from SCREEN database;
 
@@ -62,7 +74,7 @@ example_data:  Example data files that can be used to test this pipeline, includ
 For example, single-end reads:
 
 ```shell
-path=~/ASBfinder/
+path=~/ASBanalyzer/
 bash get_AS.sh \
 	-s ${path}/example_data/single_end/ENCFF000OCP.fastq.gz \
 	-w ~/WASP/ \
@@ -81,7 +93,7 @@ bash get_AS.sh \
 Paired-end reads:
 
 ```shell
-path=~/ASBfinder/
+path=~/ASBanalyzer/
 bash get_AS.sh \
 	-p ${path}/example_data/paired_end/ENCFF340SQP.fastq.gz,${path}/example_data/paired_end/ENCFF587OVW.fastq.gz \
 	-w ~/WASP/ \
@@ -108,7 +120,9 @@ Finally use the following code to activate the conda environment:
 `source ./ASB_env/bin/activate`
 
 
-
+#### Code and Data
+You can direcly download from:
+Thus, you didn't need to download WASP and other datasets by yourself.
 
 
 #### Dependencies
