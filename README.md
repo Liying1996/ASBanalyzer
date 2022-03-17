@@ -112,7 +112,8 @@ bash get_AS.sh \
 ---
 
 #### Conda Environment
-You can directly download the conda environment in: 
+You can directly download the conda environment in: []
+
 After downloaded, you'll get a file named 'ASB_env.tar.gz'
 
 Then Use `tar -zxvf` to unzip;
@@ -121,7 +122,8 @@ Finally use the following code to activate the conda environment:
 
 
 #### Code and Data
-You can direcly download from:
+You can direcly download from: []
+
 Thus, you didn't need to download WASP and other datasets by yourself.
 
 
