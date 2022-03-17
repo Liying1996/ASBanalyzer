@@ -143,10 +143,11 @@ rm ${output_dir}/counts/${name}_tmp.txt ${output_dir}/counts/${name}_counts.bed
 
 # Use binomial model to obtain allele specific sites
 echo 'Use betabinomial model to find AS sites ...'
-Rscript ${basepath}/betabinomial.R ${output_dir}/inpeak/${name}_counts.txt ${name} 0.1
+# Rscript ${basepath}/betabinomial.R ${output_dir}/inpeak/${name}_counts.txt ${name} 0.1
+R --slave --no-restore --file=betabinomial.R --args ${output_dir}/inpeak/${name}_counts.txt ${name} 0.1
 
 
-# Annotation
+#Annotation
 
 if [ "$annotation" == "human" ];then
 	ccre_file=${basepath}/data/cCREs/GRCh38-ccREs.bed
@@ -173,7 +174,9 @@ awk -F '\t' '{print $0"\t-\t-\t-\t-\t-\tUnclassified"}'  ${output_dir}/annotatio
 
 rm ${output_dir}/annotation/tmp*
 
-python ${basepath}/draw_cCRE.py -file ${output_dir}/annotation/${name}_ccre.txt -name ${name} 
+python ${basepath}/draw_cCREs_pie.py -file ${output_dir}/annotation/${name}_ccre.txt -name ${name} 
+
+R --slave --no-restore --file=${basepath}/draw_cCREs_hist.R --args ${output_dir}/annotation/${name}_ccre.txt ${name}  ${output_dir}/annotation/${name}.cCREs.hist.pdf
 
 # snpEFF Annotation
 cd ${output_dir}/annotation/
@@ -181,8 +184,38 @@ awk -F '\t' '{print $1"\t"$3"\t"$NF"\t"$4"\t"$5}' ${output_dir}/annotation/${nam
 java -jar ${snpeff_jar} ${snpeff} ${output_dir}/annotation/${name}.txt >  ${output_dir}/annotation/${name}.ann.txt 
 rm ${output_dir}/annotation/${name}.txt 
 
+# Annotation plots
+
+grep -v '##' ${output_dir}/annotation/${name}.ann.txt | cut -d '|' -f1-2 > ${output_dir}/annotation/${name}.ann.tmp.txt
+
+R --slave --no-restore --file=${basepath}/draw_annotation.R --args ${output_dir}/annotation/${name}.ann.tmp.txt ${name}  ${output_dir}/annotation/${name}.ann.distrubution.pdf
+rm ${output_dir}/annotation/${name}.ann.tmp.txt
+
 # Motif analysis
-sh ${basepath}/cal_motif.sh -i ${output_dir}/inpeak/${name}_counts_AS_0.1.txt -n ${name} -f ${fasta} -m ${motif_file} -o ${output_dir}
+
+#sh ${basepath}/cal_motif.sh -i ${output_dir}/inpeak/${name}_counts_AS_0.1.txt -n ${name} -f ${fasta} -m ${motif_file} -o ${output_dir}
+
+if [ -f "${output_dir}/motif/temp_files/${name}_pos_freq.txt" ]; then
+	rm ${output_dir}/motif/temp_files/${name}_pos_freq.txt
+fi
+
+nrow1=`grep -n 'letter-probability' ${motif_file} | cut -d ':' -f1`
+nrow1=`echo $nrow1 | awk '{print $1+1}'`
+nrow2=`grep -n "URL" ${motif_file} | cut -d ':' -f1`
+nrow2=`echo $nrow2 | awk '{print $1-1}'`
+sed -n "${nrow1}, ${nrow2}p" ${motif_file} > ${output_dir}/motif/temp_files/${name}.pfm.txt
+
+len=`wc -l ${output_dir}/motif/temp_files/${name}.pfm.txt | cut -d ' ' -f1`
+
+python ${basepath}/motif_disrupt.py -n ${name} -m ${output_dir}/motif/ -l ${len} -o ${output_dir}/motif/temp_files/
+
+
+R --slave --no-restore --file=${basepath}/draw_freq.R --args ${output_dir}/motif/temp_files/${name}_pos_freq.txt ${output_dir}/motif/temp_files/${name}.pfm.txt ${output_dir}/motif/${name}_disrupt_pos.pdf ${name}
+
+# python motif_score.py -n ${name} -f ${output_dir}/inpeak/${name}_counts_AS_0.1.txt -p ${output_dir}/motif/temp_files/${name}.pfm.txt -m ${output_dir}/motif/ -o ${output_dir}/motif/temp_files/
+bash ${basepath}/motif_score.sh -n ${name} -o ${output_dir}/motif/temp_files/
+
+R --slave --no-restore --file=${basepath}/draw_AR_score.R --args ${output_dir}/motif/temp_files/delta_score//${name}_AR_score.txt ${name} ${output_dir}/motif/${name}_AR_score.pdf
 
 # compare with GWAS and GTEx (only human hg38)
 if [ "$annotation" == "human" ];then 
@@ -194,5 +227,31 @@ if [ "$annotation" == "human" ];then
 	awk -F '[\t|_]' 'FNR==NR {x[$1"_"$4];next} ($1"_"$2 in x)' ${output_dir}/motif/${name}_AS_inmotif.txt ${gtex_file} > ${output_dir}/motif/GTEx_GWAS/${name}_AS_inmotif_gtex_genepairs.txt
 fi
 
+# Screen shots
+mkdir ${output_dir}/screenshots/
+if [ -f "${output_dir}/genomebrowser_screenshot/${name}_screenshots_links.txt" ]; then
+	rm ${output_dir}/genomebrowser_screenshot/${name}_screenshots_links.txt
+fi
+
+for line in `awk -F '\t' '$NF=="significant"' ${output_dir}/inpeak/${name}_counts_AS_0.1.txt | sed 's/\t/+/g'`;do
+	chrom=`echo $line | cut -d '+' -f1`
+	pos=`echo $line | cut -d '+' -f2` # 1-based
+	pos1=`awk "BEGIN {print ${pos}-20}"`
+	pos2=`awk "BEGIN {print ${pos}+20}"`
+	# pdf_page='http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr1%3A1477833%2D1477873&hgsid=1280864071_rnlawaLfUQQ1i4quzzQsWWEDlzt1&hgt.psOutput=on'
+	pdf_page="http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=${chrom}%3A${pos1}%2D${pos2}&hgsid=1280864071_rnlawaLfUQQ1i4quzzQsWWEDlzt1&hgt.psOutput=on"
+
+	pdf_url=$(curl -s "$pdf_page" | grep "the current browser graphic in PDF" | grep -E -o "\".+\"" | tr -d "\"" | sed 's/../https:\/\/genome.ucsc.edu/')
+	curl -s -o ${output_dir}/screenshots/${name}_${chrom}_${pos}.pdf ${pdf_url} -k
+
+	variantviewer_link="http://www.ncbi.nlm.nih.gov/variation/view/?chr=${chrom}&from=${pos1}&to=129936519&mk=${pos2}|SNP"	
+	echo ${line}"+"${pdf_page}"+"${variantviewer_link} >> ${output_dir}/screenshots/${name}_screenshots_links.txt
+
+done
+
+sed -i 's/+/\t/g' ${output_dir}/screenshots/${name}_screenshots_links.txt
+
+
 echo 'End!'
+
 
