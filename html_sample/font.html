@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>	
+		<meta charset="UTF-8">	
+		<link href="style.css" type="text/css" rel="stylesheet" />
+		<title>ASB SNPs summary</title>
+	</head>
+
+	<body>
+		
+		<h1>ASB SNPs summary</h1>
+
+		<h2 id="header1">1. ASB distribution across chromosomes</h2>
+		<div class="navibar" id="navigator">
+			<ul id='chrom'>
+			  <li><a id='1' onclick="showDiv(this)">1</a></li>
+			  <li><a id='2' onclick="showDiv(this)">2</a></li>
+			  <li><a id='3' onclick="showDiv(this)">3</a></li>
+			  <li><a id='4' onclick="showDiv(this)">4</a></li>
+			  <li><a id='5' onclick="showDiv(this)">5</a></li>
+			  <li><a id='6' onclick="showDiv(this)">6</a></li>
+			  <li><a id='7' onclick="showDiv(this)">7</a></li>
+			  <li><a id='8' onclick="showDiv(this)">8</a></li>
+			  <li><a id='9' onclick="showDiv(this)">9</a></li>
+			  <li><a id='10' onclick="showDiv(this)">10</a></li>
+			  <li><a id='11' onclick="showDiv(this)">11</a></li>
+			  <li><a id='12' onclick="showDiv(this)">12</a></li>
+			  <li><a id='13' onclick="showDiv(this)">13</a></li>
+			  <li><a id='14' onclick="showDiv(this)">14</a></li>
+			  <li><a id='15' onclick="showDiv(this)">15</a></li>
+			  <li><a id='16' onclick="showDiv(this)">16</a></li>
+			  <li><a id='17' onclick="showDiv(this)">17</a></li>
+			  <li><a id='18' onclick="showDiv(this)">18</a></li>
+			  <li><a id='19' onclick="showDiv(this)">19</a></li>
+			  <li><a id='20' onclick="showDiv(this)">20</a></li>
+			  <li><a id='21' onclick="showDiv(this)">21</a></li>
+			  <li><a id='22' onclick="showDiv(this)">22</a></li>
+			  <li><a id='X' onclick="showDiv(this)">X</a></li>
+			</ul>
+		</div>
+
+		<div class="clip" id="pic">
+			<img src="/Users/yingli/Documents/new_AS/chromosome.png";
+				position:absolute;
+		     	width="1000" ;
+		     	height="1200" ;
+		     	title="ENCFF sample">	
+     	</div>
+
+		<div id="showBox"></div>
+	
+		<h2 id="header2">2. Distribution in the genome </h2>
+
+
+		<div id="pic2">
+			<embed src="/Users/yingli/Documents/allele-specific/ENCFF001HIA.ann.distrubution.pdf";
+				height="80%" width="100%">	</embed>
+	 	</div>
+
+		<h2 id="header3">3. cCREs distribution </h2>
+			
+		<div id="pic3">
+			<embed src="/Users/yingli/Documents/allele-specific/ENCFF001HIA.cCREs.hist.pdf";
+			height="80%" width="100%"> </embed>
+	 	</div>
+		
+		<div id="pic4">
+			<embed src="/Users/yingli/Documents/allele-specific/ENCFF001HIA_cCREs.pdf";
+			height="80%" width="100%"> </embed>
+	 	</div>
+
+		<h2 id="header4">4. Motif analysis</h2>
+		<div id="pic5">
+			<embed src="/Users/yingli/Documents/allele-specific/ENCFF001HIA_dist.pdf";
+			height="80%" width="100%"> </embed>	
+		</div>
+
+		<div id="pic6">	
+			<embed src="/Users/yingli/Documents/allele-specific/ENCFF001HIA_AR_score.pdf";
+			height="80%" width="100%"> </embed>
+		</div>
+
+		<div id="pic7">
+			<embed src="/Users/yingli/Documents/allele-specific/ENCFF001HIA_disrupt_pos.pdf";
+			height="80%" width="100%"> </embed>
+		</div>
+
+
+	<script type="text/javascript" src="func.js"></script>
+
+	</body>
+
+</html>
+
+
+
+
+
+
+
