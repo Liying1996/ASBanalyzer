@@ -44,8 +44,8 @@ fimo --thresh 1 --text ${motif_file} ${output}/motif/${name}_ref.fasta > ${outpu
 fimo --thresh 1 --text ${motif_file} ${output}/motif/${name}_alt.fasta > ${output}/motif/${name}_alt_out.txt
 
 # only select SNPs seq; 4th is start, 5th is end.
-awk -F '[\t]+' '$3<=21 && $4>=21' ${output}/motif/${name}_ref_out.txt > ${output}/motif/${name}_out.txt
-awk -F '[\t]+' '$3<=21 && $4>=21' ${output}/motif/${name}_alt_out.txt >> ${output}/motif/${name}_out.txt
+awk -F '[\t]+' '$3<=21 && $4>=21' ${output}/motif/${name}_ref_out.txt | sort | uniq > ${output}/motif/${name}_out.txt
+awk -F '[\t]+' '$3<=21 && $4>=21' ${output}/motif/${name}_alt_out.txt | sort | uniq >> ${output}/motif/${name}_out.txt
 
 python ${curr_path}/best_match.py -n ${name} -input_file ${output}/motif/${name}_out.txt -output ${output}/motif/
 
@@ -80,7 +80,7 @@ rm ${output}/motif/${name}_inmotif_control.txt
 mean=`awk '{sum+=$1} END {print sum/NR}' ${output}/motif/${name}_inmotif_control_count.txt`
 sd=`awk '{x[NR]=$0; s+=$0; n++} END{a=s/n; for (i in x){ss += (x[i]-a)^2} sd = sqrt(ss/(n-1)); print sd}' ${output}/motif/${name}_inmotif_control_count.txt`
 # pVal=$(echo "$randLoci 10000" | awk '{print $1/$2}')
-Rscript ${curr_path}/draw_motif.R ${output}/motif/${name}_inmotif_control_count.txt ${AS_inmotif} ${name} ${output}/motif/${name}_dist.pdf   #generate a tmp file contains p.val
+R --slave --no-restore --file=${curr_path}/draw_motif.R --args ${output}/motif/${name}_inmotif_control_count.txt ${AS_inmotif} ${name} ${output}/motif/${name}_dist.pdf   #generate a tmp file contains p.val
 
 pVal=`cat tmp`
 rm tmp 
@@ -92,3 +92,8 @@ mkdir ${output}/motif/temp_files/
 for i in `ls ${output}/motif/${name}* | grep -v 'inmotif'`;do
     mv $i ${output}/motif/temp_files/
 done
+
+mv ${output}/motif/temp_files/${name}_dist.pdf ${output}/motif/
+
+
+

@@ -30,7 +30,8 @@ rownames(ppm) <- c("A", "C", "G", "T")
 g2 <- ggseqlogo(ppm)
 print(g2)
 
-cairo_pdf(output_file, height=7, width=10)
+#cairo_pdf(output_file, height=7, width=10)
+pdf(output_file, height=7, width=10)
 ggarrange(g2, g1, 
           ncol = 1, nrow = 2, 
           widths = c(1, 3), heights = c(1,2))

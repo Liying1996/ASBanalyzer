@@ -38,7 +38,7 @@ ul {
  
 li {
     float: left;
-    width: 30.5px;
+    width: 33.5px;
 }
  
 li a {
@@ -76,8 +76,8 @@ li a:hover {
 #header3 {
 	color:#495678;
 	font-size: 20px;
-	margin-top: 500px;
-	padding-top: 50px;
+	margin-top: 20px;
+	padding-top: 0px;
 	display: block;;
 	text-align: left;
 	text-decoration: none;
@@ -86,95 +86,96 @@ li a:hover {
 #header4 {
 	color:#495678;
 	font-size: 20px;
-	margin-top: 1100px;
-	padding-top: 50px;
+	margin-top: 20px;
+	padding-top: 20px;
 	display: block;;
 	text-align: left;
 	text-decoration: none;
 }
 
 .clip {
-    clip: rect(30px,1000px,700px,50px);
+    /*clip: rect(30px,1000px,700px,50px);*/
     position: absolute;;
   }
 
 
 .navibar {
 	margin-top: 30px;
-	margin-left: 115px;
-	width:730px;
+	margin-left: 50px;
+	width:800px;
 	height:40px;
-	border:1px solid #000;"
+	border:1px solid #000;
 }
 
 
 #pic {
 	position:absolute;
 	top: 80px;
-	margin-top:100px;
-	clip:rect(30px 200px 100px 20px);
- 	width="1000" ;
- 	height="1000" ;
+	margin-top:250px;
+	margin-left: 50px;
+	/*clip:rect(30px 200px 100px 20px);*/
+ 	width:800px;
+ 	height:500px ;
  	z-index:-1;
 }
 
 #pic2 {
-	position:absolute;
+	/*position:absolute;*/
 	top: 80px;
-	margin-left: 115px;
-	margin-top:950px;
+	margin-left: 50px;
+	margin-top:120px;
 	width: 800px;
 	height:500px;
 }
 
 #pic3 {
-	position:absolute;
+	/*position:absolute;*/
 	top: 80px;
-	margin-left: 115px;
-	margin-top:1500px;
+	margin-left: 50px;
+	margin-top:70px;
 	width: 800px;
 	height:600px;
 }
 
 
 #pic4 {
-	position:absolute;
-	top: 80px;
-	margin-left: 115px;
-	margin-top:2050px;
-	width: 600px;
-	height:600px;
- 	z-index:-1;
+	/*position:absolute;*/
+	/*top: 80px;*/
+	margin-left: 50px;
+	margin-top:10px;
+	width: 800px;
+	height:800px;
+ 	/*z-index:-1;*/
 }
 
 #pic5 {
-	position:absolute;
-	top: 80px;
-	margin-left: 115px;
-	margin-top:2700px;
+	/*position:absolute;*/
+	/*top: 80px;*/
+	margin-left: 50px;
+	margin-top:50px;
 	width: 600px;
 	height:600px;
- 	z-index:-1;
+ 	/*z-index:-1;*/
 }
 
 #pic6 {
-	position:absolute;
-	top: 80px;
-	margin-left: 115px;
-	margin-top:3250px;
+	/*position:absolute;*/
+	top: 30px;
+	margin-left: 50px;
+	margin-top:20px;
 	width: 600px;
 	height:600px;
- 	z-index:-1;
+ 	/*z-index:-1;*/
 }
 
 #pic7 {
-	position:absolute;
-	top: 80px;
-	margin-left: 115px;
-	margin-top:3750px;
+	/*position:absolute;*/
+	top: 20px;
+	margin-left: 50px;
+	margin-top:30px;
 	width: 600px;
 	height:600px;
- 	z-index:-1;
+ 	/*z-index:-1;*/
 }
 
 #navigator {
@@ -188,13 +189,12 @@ li a:hover {
 	 /*position: absolute;*/
 	margin-left: 900px;
 	margin-top: 100px;
+	margin-right: 100px;
+	padding-right: 50px;
 /*	border: 1px solid #e7e7e7;*/
+	float: left;
+	z-index:-1;
 }
-
-
-
-
-
 
 
 

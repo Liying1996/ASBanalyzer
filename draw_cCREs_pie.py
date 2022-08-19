@@ -81,7 +81,8 @@ for pie_wedge in pie_2[0]:
 ax.legend(labels, bbox_to_anchor=(1.3,1.0), loc='center left', prop=font1)
 ax.set(aspect="equal")
 
-fig.savefig(path+'/'+args.name+'_cCREs.png',dpi=200,bbox_inches='tight',facecolor=fig.get_facecolor(), transparent=True)
+#fig.savefig(path+'/'+args.name+'_cCREs.png',dpi=200,bbox_inches='tight',facecolor=fig.get_facecolor(), transparent=True)
+fig.savefig(path +'/'+ args.name+'_cCREs_pie.pdf',dpi=300,bbox_inches='tight',facecolor=fig.get_facecolor(), transparent=True)
 plt.show()
 
 

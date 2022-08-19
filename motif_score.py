@@ -4,9 +4,8 @@ from collections import defaultdict
 parser = argparse.ArgumentParser()
 parser.add_argument("-n", help = "a biosample's name, eg. ENCFF758RQJ", required = True)
 parser.add_argument("-f", help = "ASB results file", required = True)
-parser.add_argument("-p", help = "PPM (after cleaning)", required = True)
+parser.add_argument("-p", help = "PFM (after cleaning)", required = True)
 parser.add_argument("-m", help = "Motif dir", required = True)
-parser.add_argument("-o", help = "output dir", required = True)
 
 args = parser.parse_args()
 
@@ -14,7 +13,6 @@ name = args.n
 ASB_file = args.f
 ppm_file = args.p
 motif_dir = args.m
-output = args.o
 
 asb_dict = {}
 with open(ASB_file, 'r') as f0:
