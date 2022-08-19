@@ -143,6 +143,6 @@ motif/: The results of motif enrichment, the associations of positions of motif 
 screenshots: Genome browser screenshots of ASB SNPs (+-20bp);
 
 html_summary/: An HTML summary of all results and plots above.
-![Homepage]('https://github.com/Liying1996/ASBanalyzer/blob/main/example.png')
+![Homepage]("https://github.com/Liying1996/ASBanalyzer/blob/main/example.png")
 
 
