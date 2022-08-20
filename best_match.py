@@ -16,15 +16,15 @@ dic = defaultdict(list)
 with open(input_file) as f:
     for line in f:
         line = line.strip()
-        pos = line.split('\t')[1]
+        pos = line.split('\t')[2]
         dic[pos].append(line)
 
 new = open(output + '/' + biosample + '_best.txt', 'w')
 for pos in dic:
-    max_score = float(dic[pos][0].split('\t')[5])
+    max_score = float(dic[pos][0].split('\t')[6])
     max_mess = dic[pos][0]
     for message in dic[pos]:
-        score = float(message.split('\t')[5])
+        score = float(message.split('\t')[6])
         if score > max_score:
             max_score = score
             max_mess = message

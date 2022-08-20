@@ -50,6 +50,7 @@ awk -F '[\t]+' '$3<=21 && $4>=21' ${output}/motif/${name}_alt_out.txt | sort | u
 python ${curr_path}/best_match.py -n ${name} -input_file ${output}/motif/${name}_out.txt -output ${output}/motif/
 
 # select p.value <= 1e-4
+sed -i 's/\t\t/\t/g' ${output}/motif/${name}_best.txt
 awk -F '\t' '$7<0.0001' ${output}/motif/${name}_best.txt > ${output}/motif/${name}_thresh.txt
 
 awk -F '[\t]+' 'FNR==NR {x[$2];next} ($1":"$2"-"$3 in x)' ${output}/motif/${name}_thresh.txt ${output}/motif/${name}_AS_snps.bed  > ${output}/motif/${name}_AS_inmotif.txt

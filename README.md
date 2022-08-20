@@ -28,7 +28,7 @@ draw_annotation.R: Draw the genomic regions annotated by snpEFF;
 
 draw_motif.R: Draw histograms of motif enrichment;
 
-draw_PWM_score.R: Draw  scatter plots of  allele ratio and PWM score change of SNPs;
+draw_AR_score.R: Draw  scatter plots of  allele ratio and PWM score change of SNPs;
 
 draw_freq.R: Draw the motif information content and the frequency of each postion of motif disrupted by SNPs;
 
@@ -56,13 +56,15 @@ Then,
 
 ```shell
 cd ASBanalyzer/
-source ASB_env/bin/activate
+mkdir ASBanalyzer_env/
+tar zxvf ASBanalyzer_env.tar.gz -C ASBanalyzer_env/
+source ASBanalyzer_env/bin/activate
 ```
 
 ***Deactivate***
 
 ```
-source ASB_env/bin/activate
+source ASBanalyzer_env/bin/activate
 ```
 
 ---
