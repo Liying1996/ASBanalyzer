@@ -52,6 +52,7 @@ The full-version software and related datasets can be downloaded via this [link]
 
 Then,
 
+
 ***File decompression*** 
 
 ```
@@ -61,7 +62,7 @@ Then,
 ***Activate the conda enviroment***
 
 ```shell
-cd ASBanalyzer/z
+cd ASBanalyzer/
 mkdir ASBanalyzer_env/
 tar zxvf ASBanalyzer_env.tar.gz -C ASBanalyzer_env/
 source ASBanalyzer_env/bin/activate
