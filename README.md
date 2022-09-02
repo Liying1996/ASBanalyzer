@@ -48,14 +48,20 @@ example_data/ :  Example data files that can be used to test this pipeline, incl
 
 #### Installation
 
-You can download the whole software and related datasets via:
+The full-version software and related datasets can be downloaded via this [link](https://drive.google.com/file/d/1bNkO9bY2AIW-Lw80Y6S53Sgtm8Gh0OFX/view?usp=sharing).
 
 Then,
+
+***File decompression*** 
+
+```
+ tar -jxvf ASBanalyzer.tar.bz2
+```
 
 ***Activate the conda enviroment***
 
 ```shell
-cd ASBanalyzer/
+cd ASBanalyzer/z
 mkdir ASBanalyzer_env/
 tar zxvf ASBanalyzer_env.tar.gz -C ASBanalyzer_env/
 source ASBanalyzer_env/bin/activate
@@ -67,6 +73,19 @@ source ASBanalyzer_env/bin/activate
 source ASBanalyzer_env/bin/activate
 ```
 
+***Build BWA index***
+
+If you want to use your own reference genome and index,  you can skip this step.
+
+```
+bwa index GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta
+```
+
+***Build annovar database***
+
+```
+perl data/annovar/annotate_variation.pl --downdb --webfrom annovar --buildver hg38 avsnp150 data/annovar/humandb/
+```
 ---
 
 #### Usage and parameters
