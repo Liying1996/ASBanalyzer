@@ -56,7 +56,7 @@ Then,
 ***File decompression*** 
 
 ```
- tar -jxvf ASBanalyzer.tar.bz2
+ tar -jxvf ASBanalyzer.tar.bz2 -C ASBanalyzer_env/
 ```
 
 ***Activate the conda enviroment***
@@ -64,7 +64,7 @@ Then,
 ```shell
 cd ASBanalyzer/
 mkdir ASBanalyzer_env/
-tar zxvf ASBanalyzer_env.tar.gz -C ASBanalyzer_env/
+# tar zxvf ASBanalyzer_env.tar.gz -C ASBanalyzer_env/
 source ASBanalyzer_env/bin/activate
 ```
 
