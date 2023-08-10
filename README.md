@@ -195,17 +195,35 @@ counts/: The read counts of ref and alt alleles performed by `WASP-bam2h5.py`. I
 
 inpeak/ : SNPs exclusively within ChIP-seq peaks. This folder contains three files: `${name}_counts.txt`, ``${name}_counts_0.1.pdf`, and `${name}_counts_AS_0.1.txt`. Among them, `${name}_counts.txt` includes the read count information of SNPs in peaks; `${name}_counts_0.1.pdf` displays the  ref allele ratio distribution of ASB SNPs and non-ASB SNPs; `${name}_counts_AS_0.1.txt` encompasses the statistical information of all ASB SNPs and non-ASB SNPs. Examples of the last two files is provided below.
 
+The distribution of ref allele ratio:
+
 ![${name}_counts_0.1.pdf](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_counts_0.1.jpg)
+
+The ASB SNPs:
 
 ![${name}_counts_0.1.txt](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_counts_0.1_txt.jpg)
 
 annotation/: Generate outputs and visualize the genomic regions as well as cCREs in which SNPs are enriched. This directory primarily includes five files: `${name}.ann.txt`,  `${name}.ann.distrubution.pdf`, `${name}.ccre.txt`, `${name}.cCREs.hist.pdf`, and `${name}.cCREs_pie.pdf`. These files consist of the annotation file obtained through snpEFF and the cCREs file in which the SNPs are enriched. Moreover, distribution charts are generated based on these two files.
 
+Annotation:
+
+![](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example.ann.distrubution.jpg)
+
+Example of cCREs enrichment (Pie chart version):
+
+![](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_cCREs_pie.jpg)
+
 motif/: This directory contains the outcomes of motif enrichment, the associations involving positions of motif disruption and motif information content, as well as the correlations regarding the allele ratio and PWM score change of reference and alternative alleles. The results of motif analysis primarily includes the `${name}_AR_score.pdf`, `${name}_dist.pdf`, `${name}_disrupt_pos.pdf`, and `${name}_results_inmotif.txt` files. The former files provide visualizations, while the last offers statistical outcomes.. Additionally, this directory encompasses the GTEx_GWAS/ subfolder, within which results are presented for SNPs and their associations with corresponding GWAS phenotypes. Among them, the results are divided into SNPs disrupting motif recognition sequences and the outcomes for all SNPs associated with GWAS phenotypes and GTEx. 
+
+Motif analysis results (${name}\_dist.pdf, ${name}\_AR_score.pdf,  ${name}_disrupt_pos.pdf): 
 
 ![motif analysis results](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_motif_analysis.jpg)
 
+Example GWAS Associations result: 
+
 ![example_gwas_associations](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_gwas_associations.jpg)
+
+Example GTEx genes result: 
 
 ![example_gtex_genepairs](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_gtex_genepairs.jpg)
 
@@ -225,7 +243,7 @@ The homepage of HTML-based summary:
 
 Upon clicking on a particular chromosome in the navigation bar of the page, the entirety of information regarding ASB SNPs on that chromosome will be presented on the right-hand side:
 
-![example_font_chr.html](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/eexample_font_click.jpg)
+![](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_font_chr.jpg)
 
 The summary also includes the annotation and motif analysis results, an example (example_data/example_outputs/html_summary/ENCFF001HIA_font.html) is also presented for reference.
 
