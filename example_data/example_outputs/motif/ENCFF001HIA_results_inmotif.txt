@@ -1,0 +1,2 @@
+name AS_inmotif AS_total nonAS_inmotif nonAS_total control_mean control_sd pVal
+ENCFF001HIA 46 79 344 2844 9.5089 2.84414 1.11e-37

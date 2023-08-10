@@ -1,0 +1,12 @@
+ANNOVAR Version:
+	$Date: 2020-06-07 23:56:37 -0400 (Sun,  7 Jun 2020) $
+ANNOVAR Information:
+	For questions, comments, documentation, bug reports and program update, please visit http://www.openbioinformatics.org/annovar/
+ANNOVAR Command:
+	/home/liying/test_ASB/ASBfinder/data/annovar/annotate_variation.pl /home/liying/test_ASB/ASBfinder/example_data/output/single//html_summary/ENCFF001HIA_as_snps.txt /home/liying/test_ASB/ASBfinder/data/annovar/humandb/ -filter -build hg38 -dbtype avsnp150
+ANNOVAR Started:
+	Thu May 26 02:33:26 2022
+NOTICE: Output file with variants matching filtering criteria is written to /home/liying/test_ASB/ASBfinder/example_data/output/single//html_summary/ENCFF001HIA_as_snps.txt.hg38_avsnp150_dropped, and output file with other variants is written to /home/liying/test_ASB/ASBfinder/example_data/output/single//html_summary/ENCFF001HIA_as_snps.txt.hg38_avsnp150_filtered
+NOTICE: Processing next batch with 79 unique variants in 79 input lines
+NOTICE: Database index loaded. Total number of bins is 28304406 and the number of bins to be scanned is 78
+NOTICE: Scanning filter database /home/liying/test_ASB/ASBfinder/data/annovar/humandb/hg38_avsnp150.txt...Done
