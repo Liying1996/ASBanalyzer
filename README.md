@@ -193,7 +193,7 @@ dup/: The results files after duplicate removal with Picard.
 
 counts/: The read counts of ref and alt alleles performed by `WASP-bam2h5.py`. In this folder, the `${name}_counts.txt` file represents the subsequent read counts file for processing. 
 
-inpeak/ : SNPs exclusively within ChIP-seq peaks. This folder contains three files: `${name}_counts.txt`, ``${name}_counts_0.1.pdf`, and `${name}_counts_AS_0.1.txt`. Among them, `${name}_counts.txt` includes the read count information of SNPs in peaks; `${name}_counts_0.1.pdf` displays the  ref allele ratio distribution of ASB SNPs and non-ASB SNPs; `${name}_counts_AS_0.1.txt` encompasses the statistical information of all ASB SNPs and non-ASB SNPs. Examples of the last two files is provided below.
+inpeak/ : SNPs exclusively within ChIP-seq peaks. This folder contains three files: `${name}_counts.txt`, `${name}_counts_0.1.pdf`, and `${name}_counts_AS_0.1.txt`. Among them, `${name}_counts.txt` includes the read count information of SNPs in peaks; `${name}_counts_0.1.pdf` displays the  ref allele ratio distribution of ASB SNPs and non-ASB SNPs; `${name}_counts_AS_0.1.txt` encompasses the statistical information of all ASB SNPs and non-ASB SNPs. Examples of the last two files is provided below.
 
 The distribution of ref allele ratio:
 
@@ -212,6 +212,10 @@ Annotation:
 Example of cCREs enrichment (Pie chart version):
 
 ![](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_cCREs_pie.jpg)
+
+Example of cCREs enrichment (Barplot chart version):
+
+![](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_cCREs_hist.jpg)
 
 motif/: This directory contains the outcomes of motif enrichment, the associations involving positions of motif disruption and motif information content, as well as the correlations regarding the allele ratio and PWM score change of reference and alternative alleles. The results of motif analysis primarily includes the `${name}_AR_score.pdf`, `${name}_dist.pdf`, `${name}_disrupt_pos.pdf`, and `${name}_results_inmotif.txt` files. The former files provide visualizations, while the last offers statistical outcomes.. Additionally, this directory encompasses the GTEx_GWAS/ subfolder, within which results are presented for SNPs and their associations with corresponding GWAS phenotypes and GTEx eQTLs. Among them, the results are divided into SNPs disrupting motif recognition sequences and the outcomes for all SNPs associated with GWAS phenotypes and GTEx. 
 
@@ -233,7 +237,7 @@ screenshots: Within this directory, an `${name}_screenshots_links.txt` file will
 
 html_summary/: This directory comprises a comprehensive HTML-based summary incorporating all the preceding results and graphical representations. Additionally, users can also exclusively review the `${name}_all_summary_ID.txt` file, which is a text-based summary excluding visualizations.
 
-example_all_summary_ID.jpg
+example_all_summary_ID:
 
 ![example_all_summary_ID.txt](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_all_summary_ID.jpg)
 
@@ -245,7 +249,7 @@ Upon clicking on a particular chromosome in the navigation bar of the page, the 
 
 ![](https://github.com/Liying1996/ASBanalyzer/raw/main/example_data/example_outputs/example_figs/example_font_chr.jpg)
 
-The summary also includes the annotation and motif analysis results, an example (example_data/example_outputs/html_summary/ENCFF001HIA_font.html) is also presented for reference.
+The summary also includes the annotation and motif analysis results, an example (example_data/example_outputs/html_summary/ENCFF001HIA_font.html) is also presented for reference.  Users can download the [example output folder](https://github.com/Liying1996/ASBanalyzer/tree/main/example_data/example_outputs/html_summary) and simply open the ENCFF001HIA_font.html file to view the output results. (Please note that users must download all the files in this folder for the HTML to display correctly.)
 
 Furthermore, the aforementioned example output files can all be found in the example_data/example_outputs/ directory.
 
